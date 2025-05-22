@@ -2,7 +2,7 @@ import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: `Login | Kasir `,
-  desciption: `Build & Develop by Fahmi Dhika`,
+  description: `Build & Develop by Fahmi Dhika`,
 };
 
 type PropsLayout = {
