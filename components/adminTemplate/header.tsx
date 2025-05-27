@@ -2,9 +2,10 @@
 
 import { ReactNode, useState, useEffect } from "react";
 import { removeCookie } from "@/lib/client-cookie";
-import { BASE_URL_API } from "@/global";
+import { BASE_URL_API, FOTO_URL } from "@/global";
 import { useRouter } from "next/navigation";
 import { getCookie } from "@/lib/client-cookie";
+import { IUser } from "@/app/types";
 import Item from "./item";
 import Image from "next/image";
 
@@ -22,10 +23,11 @@ type adminProps = {
   children: ReactNode;
   id: string;
   title: string;
+  user: IUser | null;
   itemProps: itemProps[];
 };
 
-const Header = ({ children, id, title, itemProps }: adminProps) => {
+const Header = ({ children, id, title, itemProps, user }: adminProps) => {
   const [nama, setNama] = useState<string>("");
   const [isShow, setIsShow] = useState<boolean>(false);
 
@@ -53,11 +55,20 @@ const Header = ({ children, id, title, itemProps }: adminProps) => {
           <IoMenu size={32} />
         </button>
         <div className="w-full relative flex justify-between items-center">
-          {/* Kiri: Info Admin (hanya tampil di desktop) */}
-          <h1 className="hidden lg:block text-xl tracking-wider">
-            Admin,{" "}
-            <span className="font-bold text-2xl text-[#A0C878]">{nama}</span>
-          </h1>
+          <div className="flex items-center gap-4">
+            <Image
+              src={`${FOTO_URL}/${user?.foto}`}
+              alt="Foto"
+              width={48}
+              height={48}
+              className="hidden lg:block rounded-full object-cover"
+            />
+            {/* Kiri: Info Admin (hanya tampil di desktop) */}
+            <h1 className="hidden lg:block text-xl tracking-wider">
+              {user?.role},{" "}
+              <span className="font-bold text-2xl text-[#A0C878]">{nama}</span>
+            </h1>
+          </div>
 
           {/* Tengah: Title */}
           {/* Versi mobile: tampil biasa */}
@@ -91,12 +102,22 @@ const Header = ({ children, id, title, itemProps }: adminProps) => {
               </button>
             </div>
 
-            <h1 className="font-bold tracking-wide text-3xl mb-14">
+            <h1 className="font-bold tracking-wide text-3xl mb-9">
               Kasir Mura 5
             </h1>
 
+            <div className="flex justify-center mb-3">
+              <Image
+                src={`${FOTO_URL}/${user?.foto}`}
+                alt="Foto"
+                width={150}
+                height={150}
+                className="rounded-full object-cover"
+              />
+            </div>
+
             <p className="mb-14">
-              Admin, <br />
+              {user?.role}, <br />
               <span className="font-bold text-[#A0C878] text-2xl border-b-4 px-2">
                 {nama}
               </span>
