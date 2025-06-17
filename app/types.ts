@@ -8,3 +8,13 @@ export interface IUser {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IBarang {
+  id: string;
+  uuid: string;
+  namaBarang: string;
+  harga: number;
+  stok: number;
+  createdAt: string;
+  updatedAt: string;
+}

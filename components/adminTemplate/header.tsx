@@ -77,8 +77,15 @@ const Header = ({ children, id, title, itemProps, user }: adminProps) => {
           </h1>
 
           {/* Versi desktop: posisinya absolut di tengah */}
-          <h1 className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 font-bold text-2xl tracking-wider px-2 border-b-4">
-            {title}
+          <h1 className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 text-xl">
+            {itemProps.map((item, index) => (
+              <Item
+                label={item.label}
+                path={item.path}
+                active={item.id === id}
+                key={`keyItem${index}`}
+              />
+            ))}
           </h1>
 
           {/* Kanan: Logout button (hanya di desktop) */}
@@ -144,7 +151,7 @@ const Header = ({ children, id, title, itemProps, user }: adminProps) => {
         </div>
       </header>
 
-      <div className="px-6 py-4">{children}</div>
+      <div className="px-6 lg:px-24 py-8">{children}</div>
     </div>
   );
 };

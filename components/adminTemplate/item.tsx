@@ -11,7 +11,7 @@ const Item = ({ label, path, active }: itemProps) => {
     <Link
       href={path}
       className={`flex items-center space-x-2 px-4 py-2 rounded ${
-        active ? "bg-[#DDEB9D]" : "bg-auto"
+        active ? "bg-[#DDEB9D] shadow-xl rounded-xl" : "bg-auto"
       }`}
     >
       <p>{label}</p>
